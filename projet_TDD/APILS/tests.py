@@ -64,9 +64,21 @@ class ListAPIViewTestCase(APITestCase):
         self.assertEqual(
             response.data, {"detail": "Authentication credentials were not provided."})
 
+    def test_get_airframer_from_api(self):
+        
+        client = APIClient()
+
+        # creation of the request
+        response = client.post(
+            'http://localhost:8000/getAirframer/',
+            {
+                'airframer': 'test_airframer'
+            },
+            format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
     def test_get_aircraft_from_api(self):
-        # authentication
-        # Include an appropriate `Authorization:` header on all requests.
         client = APIClient()
 
         # creation of the request

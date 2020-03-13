@@ -20,16 +20,24 @@ class UserViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
+def get_airframer(request):
+
+    try:
+        current = {}
+        airframer = Airframer.objects.get(name=request.data['airframer']) 
+
+        current = {
+            'airframer': airframer.name,
+        }
+
+        return HttpResponse(json.dumps(current), status=200)
+    except Exception as identifier:
+        print("A problem occured :"+str(identifier))
+        return HttpResponseNotFound('<h1>FATAL ERROR </h1>\n' + str(identifier))
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
 def get_aircraft(request):
-    """API endpoint that return datas viewed in he dashboard
-    according to parameters in POST request
-
-    Arguments:
-        request {[type]} -- [description]
-
-    Returns:
-        [HttpResponse] -- [JSON]
-    """
 
     try:
         current = {}
@@ -39,7 +47,7 @@ def get_aircraft(request):
             'aircraft': aircraft.name,
             'flight_hours_per_year': aircraft.fh_year,
             'Warrranty_duration': aircraft.warranty_duration_new_product,
-            
+
         }
 
         return HttpResponse(json.dumps(current), status=200)
