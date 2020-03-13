@@ -10,7 +10,7 @@ L'API sera utilisée par la suite pour créer une application de gestion d'équi
 
 ## Routes :
 
-`/home` : page d'accueil de l'API
+`/` : page d'accueil de l'API
 
 `/getProductLine` : get a specific Product Line
 
@@ -44,51 +44,10 @@ L'API sera utilisée par la suite pour créer une application de gestion d'équi
 
 `/getAllSRUs` : get a list of all the existing SRUs
 
-`/addProductLine` : send a request to add a product line in the database
+`/addElement` : send a request to add a specified element in the database
 
-`/addSystemName` : send a request to add a system name in the database
+`/editElement` : send a request to edit an specified element
 
-`/addAirframer` : send a request to add a airframer in the database
+`/removeElement` : send a request to remove a specified element
 
-`/addAircraft` : send a request to add a aircraft in the database
-
-`/addLruDenom` : send a request to add a lru denomination in the database
-
-`/addSruDdenom` : send a request to add a sru denomination in the database
-
-`/addLRU` : send a request to add a LRU in the database
-
-`/addLRU` : send a request to add a SRU in the database
-
-`/editProductLine` : send a request to edit an existing product line
-
-`/editSystemName` : send a request to edit an existing system name
-
-`/editAirframer` : send a request to edit an existing airframer
-
-`/editAircraft` : send a request to edit an existing aircraft
-
-`/editLruDenom` : send a request to edit an existing lru denomination
-
-`/editSruDenom` : send a request to edit an existing sru denomination
-
-`/editLRU` : send a request to edit an existing LRU
-
-`/editSRU` : send a request to edit an existing SRU
-
-`/removeProductLine` : send a request to remove a product line
-
-`/removeSystemName` : send a request to remove a system name
-
-`/removeAirframer` : send a request to remove an airframer
-
-`/removeAircraft` : send a request to remove an aircraft
-
-`/removeLruDenom` : send a request to remove a lru denomination
-
-`/removeSruDenom` : send a request to remove a sru denomination
-
-`/editLRU` : send a request to remove a LRU
-
-`/editSRU` : send a request to remove a SRU
-
+D'autres routes seront créées ultérieurement afin d'accéder à des données servant à générer des statistiques. Des regroupements de données par exemple.
