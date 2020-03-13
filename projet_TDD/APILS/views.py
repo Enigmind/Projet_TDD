@@ -1,16 +1,11 @@
+import simplejson as json  
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
-from django.shortcuts import render
 from rest_framework import viewsets
-from APILS.models import *
-from projet_TDD.serializers import *
 from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseNotFound
+from APILS.models import *
 from projet_TDD.serializers import UserSerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
-import simplejson as json  
-
 
 # Create your views here.
 
