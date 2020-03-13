@@ -245,7 +245,8 @@ class SRU(models.Model):
     sru_denomination = models.ForeignKey(
         SruDenomination, default='', on_delete=models.CASCADE)
 
-    lru = models.ManyToManyField(LRU)
+    lru = models.ForeignKey(
+        LRU, default='', on_delete=models.CASCADE)
 
     # Block Product basic data
     pn = models.CharField(max_length=30, unique=True)
