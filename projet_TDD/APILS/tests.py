@@ -58,7 +58,7 @@ class ListAPIViewTestCase(APITestCase):
 
     def test_access_api_without_credentials(self):
         # creation of the request
-        response = self.client.get('http://localhost:8000/users/')
+        response = self.client.get('/users/')
 
         # response verification
         self.assertEqual(
@@ -70,7 +70,7 @@ class ListAPIViewTestCase(APITestCase):
 
         # creation of the request
         response = client.post(
-            'http://localhost:8000/getAirframer/',
+            '/getAirframer/',
             {
                 'airframer': 'test_airframer'
             },
@@ -84,7 +84,7 @@ class ListAPIViewTestCase(APITestCase):
 
         # creation of the request
         response = client.post(
-            'http://localhost:8000/getAircraft/',
+            '/getAircraft/',
             {
                 'aircraft': 'test_aircraft'
             },
@@ -98,7 +98,7 @@ class ListAPIViewTestCase(APITestCase):
 
         # creation of the request
         response = client.post(
-            'http://localhost:8000/countAircrafts/',
+            '/countAircrafts/',
             {
                 'element': 'count'
             },
@@ -107,3 +107,34 @@ class ListAPIViewTestCase(APITestCase):
         # response verification
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+
+    def test_count_aircrafts_view(self):
+        #there is already an aircraft in test database, we create 3 more aircrafts
+        ac2 = Aircraft.objects.create(
+            airframer=Airframer.objects.get(
+                name="test_airframer"),
+            name='ac2')
+        ac3 = Aircraft.objects.create(
+            airframer=Airframer.objects.get(
+                name="test_airframer"),
+            name='ac3')
+        ac4 = Aircraft.objects.create(
+            airframer=Airframer.objects.get(
+                name="test_airframer"),
+            name='ac4')
+        ac2.save()
+        ac3.save()
+        ac4.save()
+
+        client = APIClient()
+
+        # creation of the request
+        response = client.post(
+            '/countAircrafts/',
+            {
+                'element': 'count'
+            },
+            format='json')
+
+        # response verification
+        self.assertEqual(response.content, b'{\"count_aircrafts\": 4}')

@@ -22,8 +22,8 @@ class UserViewSet(viewsets.ModelViewSet):
 @permission_classes((permissions.AllowAny,))
 def get_airframer(request):
 
+    current = {}
     try:
-        current = {}
         airframer = Airframer.objects.get(name=request.data['airframer']) 
 
         current = {
@@ -39,8 +39,8 @@ def get_airframer(request):
 @permission_classes((permissions.AllowAny,))
 def get_aircraft(request):
 
+    current = {}
     try:
-        current = {}
         aircraft = Aircraft.objects.get(name=request.data['aircraft']) 
 
         current = {
@@ -59,14 +59,13 @@ def get_aircraft(request):
 @permission_classes((permissions.AllowAny,))
 def count_aircrafts(request):
 
+    current = {}
     try:
-        current = {}
-
+        count = Aircraft.objects.all().count()
         current = {
-            'success': 'true',
-
+            'count_aircrafts': count,
         }
-        
+
         return HttpResponse(json.dumps(current), status=200)
     except Exception as identifier:
         print("A problem occured :"+str(identifier))
