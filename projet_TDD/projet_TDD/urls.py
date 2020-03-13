@@ -30,4 +30,5 @@ urlpatterns = [
     path('getAirframer/', views.get_airframer),
     path('getAircraft/', views.get_aircraft),
     path('countAircrafts/', views.count_aircrafts),
+    path('addElement/', views.add_element),
 ]

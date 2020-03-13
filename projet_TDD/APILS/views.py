@@ -41,7 +41,7 @@ def get_aircraft(request):
 
     current = {}
     try:
-        aircraft = Aircraft.objects.get(name=request.data['aircraft']) 
+        aircraft = Aircraft.objects.get(name=request.data['aircraft'])
 
         current = {
             'aircraft': aircraft.name,
@@ -70,3 +70,27 @@ def count_aircrafts(request):
     except Exception as identifier:
         print("A problem occured :"+str(identifier))
         return HttpResponseNotFound('<h1>FATAL ERROR </h1>\n' + str(identifier))
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def add_element(request):
+
+    current = {}
+    element = request.data['element']
+
+    if element == 'airframer':
+        try:
+            new_airframer = Airframer.objects.create(name=request.data['name'])
+            new_airframer.save()
+            current = {
+                'state': "success",
+            }
+
+            return HttpResponse(json.dumps(current), status=200)
+
+        except Exception as identifier:
+            current = {
+                'state': "failure",
+                'error' : identifier,
+            }
+            return HttpResponse(json.dumps(current), status=501)

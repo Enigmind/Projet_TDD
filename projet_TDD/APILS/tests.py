@@ -138,3 +138,21 @@ class ListAPIViewTestCase(APITestCase):
 
         # response verification
         self.assertEqual(response.content, b'{\"count_aircrafts\": 4}')
+
+    def test_add_aiframer_in_db_via_api(self):
+
+        client = APIClient()
+
+        # creation of the request
+        client.post(
+            '/addElement/',
+            {
+                'element': 'airframer',
+                'name': 'new_airframer',
+            },
+            format='json')
+
+        exists = Airframer.objects.filter(name="new_airframer").exists()
+
+        # response verification
+        self.assertEqual(exists, True)
