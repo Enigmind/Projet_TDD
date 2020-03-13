@@ -24,8 +24,8 @@ class ListAPIViewTestCase(APITestCase):
         test_airframer.save()
         test_aircraft = Aircraft.objects.create(
             airframer=Airframer.objects.get(
-                name=test_airframer.name), 
-                name='test_aircraft')
+                name=test_airframer.name),
+            name='test_aircraft')
         test_aircraft.save()
 
         test_productline = ProductLine.objects.create(name='test_productline')
@@ -65,7 +65,7 @@ class ListAPIViewTestCase(APITestCase):
             response.data, {"detail": "Authentication credentials were not provided."})
 
     def test_get_airframer_from_api(self):
-        
+
         client = APIClient()
 
         # creation of the request
@@ -76,8 +76,9 @@ class ListAPIViewTestCase(APITestCase):
             },
             format='json')
 
+        # response verification
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
+
     def test_get_aircraft_from_api(self):
         client = APIClient()
 
@@ -88,4 +89,21 @@ class ListAPIViewTestCase(APITestCase):
                 'aircraft': 'test_aircraft'
             },
             format='json')
+
+        # response verification
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+    def test_count_aircrafts_view_access(self):
+        client = APIClient()
+
+        # creation of the request
+        response = client.post(
+            'http://localhost:8000/countAircrafts/',
+            {
+                'element': 'count'
+            },
+            format='json')
+
+        # response verification
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+

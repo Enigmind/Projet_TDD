@@ -54,3 +54,20 @@ def get_aircraft(request):
     except Exception as identifier:
         print("A problem occured :"+str(identifier))
         return HttpResponseNotFound('<h1>FATAL ERROR </h1>\n' + str(identifier))
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def count_aircrafts(request):
+
+    try:
+        current = {}
+
+        current = {
+            'success': 'true',
+
+        }
+        
+        return HttpResponse(json.dumps(current), status=200)
+    except Exception as identifier:
+        print("A problem occured :"+str(identifier))
+        return HttpResponseNotFound('<h1>FATAL ERROR </h1>\n' + str(identifier))

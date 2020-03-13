@@ -29,4 +29,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('getAirframer/', views.get_airframer),
     path('getAircraft/', views.get_aircraft),
+    path('countAircrafts/', views.count_aircrafts),
 ]
